@@ -3,15 +3,15 @@ import {logo} from '../assets'
 
 const Header = () => {
 
-    function github(){
-        
+    function github(url){
+        window.open(url);
     }
 
     return (
         <header className='w-full flex justify-center items-center flex-col'>
             <nav className='flex justify-between items-center w-full mb-10 pt-5'>
                 <img src={logo} alt='logo' className='w-28 object-contain'/>
-                <button className='black_btn' onClick={github}>
+                <button className='black_btn' onClick={() => {github("https://github.com/and-yliu/writing_assistant")}}>
                     GitHub
                 </button>
             </nav>

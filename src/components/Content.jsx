@@ -4,12 +4,12 @@ import Rephrase from '../Functions/Rephrase'
 import Summarize from '../Functions/Summarize'
 
 const Content = () => {
-  const [func, setFunc] = React.useState("summarize")
+  const [func, setFunc] = React.useState("")
 
   return (
     <>
       <form className="radio-group mt-10 w-full font-satoshi font-medium back">
-        <input type="radio" id="radio1" name="radiogroup" value={1} defaultChecked/>
+        <input type="radio" id="radio1" name="radiogroup" value={1}/>
         <label htmlFor="radio1" onClick={() => setFunc("summarize")}>Summarize</label>
 
         <input type="radio" id="radio2" name="radiogroup" value={2}/>
@@ -20,7 +20,7 @@ const Content = () => {
       </form>
 
       {
-        func == "summarize"? <Summarize /> : func == "rephrase"? <Rephrase />: <Grammar />
+        func == "summarize"? <Summarize /> : func == "rephrase"? <Rephrase />: func == "grammar"?<Grammar />: <div></div>
       }
 
     </>

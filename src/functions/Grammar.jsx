@@ -1,6 +1,8 @@
 import React from 'react'
 import OpenAI from 'openai'
 import paragraphIcon from "../assets/paragraphIcon.png";
+import ReactMarkdown from "react-markdown"
+import Markdown from 'react-markdown';
 
 const _apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 
@@ -33,7 +35,7 @@ const Grammar = () => {
 				},
 				{
 					role: 'user',
-					content: `Paragraph: ${paragraph.para}`
+					content: `Paragraph: ${paragraph.para}. Output as a list in markdown format.`
 				}
 			]
 
@@ -48,9 +50,9 @@ const Grammar = () => {
 				const updatedAllParagraph = [newParagraph, ...allParagraph]
 
 				setParagraph(newParagraph)
-				setAllParagraph(updatedAllParagraph)
+				//setAllParagraph(updatedAllParagraph)
 
-				localStorage.setItem('paragraph', JSON.stringify(updatedAllParagraph))
+				localStorage.setItem('grammar', JSON.stringify(updatedAllParagraph))
 			}
 
 		}catch (error) {
@@ -61,7 +63,7 @@ const Grammar = () => {
 	}
 
 	React.useEffect(()=>{
-        const projectLocal = JSON.parse(localStorage.getItem('paragraph'))
+        const projectLocal = JSON.parse(localStorage.getItem('grammar'))
 
         if(projectLocal){
             setAllParagraph(projectLocal)
@@ -104,13 +106,13 @@ const Grammar = () => {
 							Hmm... That was not supposed to happen. Please try again....
 						</p>
 					):(
-						paragraph.rephrase && <article className='flex flex-col gap-3'>
+						paragraph.grammar && <article className='flex flex-col gap-3'>
 							<h2 className='font-satoshi font-bold text-gray-600 text-xl'>
 								Grammar <span className='red_gradient'>Suggestions</span>
 							</h2>
 							<div className='summary_box'>
 								<p className='font-inter font-medium text-sm text-gray-700'>
-									{paragraph.grammar}
+                  <Markdown>{paragraph.grammar}</Markdown>
 								</p>
 							</div>
 						</article>
